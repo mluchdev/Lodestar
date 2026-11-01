@@ -1,0 +1,32 @@
+# Junk rules for lodestar-fetch. When unsure, don't filter.
+# Rules in [drop_*] remove an article (logged to data/dropped.json);
+# rules in [flag] only tag it (field "flags"). Move a rule to change its action.
+
+keep_types = ["article", "preprint", "review", "conference-paper"]
+min_words = 30
+
+# Publishing housekeeping, matched at the start of the title
+[drop_title]
+paratext = '(?i)^\s*(erratum|corrigendum|correction\s+to\b|(author|publisher)\s+correction|addendum|retract(ion|ed)|expression\s+of\s+concern|withdrawn|editorial|preface|foreword|(front|back)\s+matter|table\s+of\s+contents|masthead|in\s+memoriam|obituary|book\s+review|call\s+for\s+papers|reviewer\s+acknowledg|thanks\s+to\s+(our\s+)?reviewers|(abstracts?|proceedings)\s+of|index\s+to\s+volume|announcement)'
+
+# Placeholder abstracts
+[drop_abstract]
+stub = '(?i)^\s*(no\s+abstract|abstract\s+not\s+available|n/?a\.?\s*$|this\s+article\s+is\s+protected\s+by\s+copyright|©)'
+
+# Matched against the title and the abstract separately
+[flag]
+debate = '(?i)^\s*((reply|response)\s+to|comment(ary)?\s+on|letter\s+to\s+the\s+editor)\b'
+llm-text = '(?i)as\s+an\s+ai\s+language\s+model|regenerate\s+response|certainly[,!]\s+here\s+is|as\s+of\s+my\s+(last\s+)?knowledge\s+(cutoff|update)|i\s+cannot\s+(browse|access)\s+(the\s+)?internet'
+# mass-produced genres: low long-run impact
+template-pharma = '(?i)\bnetwork\s+pharmacology\b|\bmolecular\s+docking\b[^.]*\b(molecular\s+dynamics|admet)\b'
+template-mr = '(?i)\bmendelian\s+randomi[sz]ation\b'
+template-cohorts = '(?i)\b(nhanes|global\s+burden\s+of\s+disease|gbd\s+20\d\d|uk\s+biobank)\b[^.]*\b(association|associated|prevalence|trends?)\b'
+template-hubgenes = '(?i)\bhub\s+genes?\b|\b(geo|tcga)\b[^.]*\b(differentially\s+expressed|prognostic\s+signature)\b'
+template-biblio = '(?i)\bbibliometric\b|\b(vosviewer|citespace)\b'
+template-metaheuristic = '(?i)\b(whale|grey\s+wolf|firefly|cuckoo|sparrow|jellyfish|dung\s+beetle|harris\s+hawks?|salp\s+swarm|moth[- ]flame|slime\s+mou?ld)\s+(optimi[sz]\w*|algorithm)\b'
+template-hybrid-forecast = '(?i)\bhybrid\s+[\w-]+[- ][\w-]+([- ][\w-]+)?\s+(model|approach|framework)\s+for\s+(short[- ]term\s+)?(stock|load|wind\s+(speed|power)|price|traffic)\s+(prediction|forecasting)\b'
+template-toy-data = '(?i)\b(iris|titanic|pima\s+indians?|wisconsin\s+breast\s+cancer|boston\s+housing)\s+(data\s*set|dataset)\b'
+template-ml-comparison = '(?i)\b(comparative\s+(study|analysis)|comparison)\s+of\s+(various\s+|different\s+)?machine\s+learning\s+(algorithms|models|techniques|classifiers)\b'
+template-kap = '(?i)\bknowledge,?\s+attitudes?,?\s+and\s+practices?\b|\bkap\s+(study|survey)\b'
+template-case-report = '(?i)\bcase\s+(report|series)\b'
+template-protocol = '(?i)^\s*study\s+protocol\b|\bprotocol\s+for\s+a\s+(randomi[sz]ed|systematic)\b'

@@ -5,8 +5,8 @@ An agentic system that finds the most impactful research articles from the last 
 ## Idea
 
 1. **Collect** recent articles from research sources.
-2. **Sieve** them with regex (keywords, topics), so the LLM never sees thousands of papers.
-3. **Rank** the survivors with an LLM agent by likely impact and relevance.
+2. **Sieve** them (careful regex, then embeddings against the user's topic) down to a small set.
+3. **Rank** the survivors by likely impact and relevance, and generate an HTML/LaTeX report of the top 10. No LLM is needed; a local one may later explain the choices.
 
 ## Lanes
 
@@ -26,6 +26,7 @@ The project is young and its direction is open.
 ## Layout
 
 - `src/` – code
+- `TODO.md` – the plan; the heart of the project
 - `data/` – local data (git-ignored)
 - `lodestar.tex` – short write-up; build with `pdflatex lodestar.tex`
 
