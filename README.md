@@ -8,6 +8,19 @@ An agentic system that finds the most impactful research articles from the last 
 2. **Sieve** them with regex (keywords, topics), so the LLM never sees thousands of papers.
 3. **Rank** the survivors with an LLM agent by likely impact and relevance.
 
+## Lanes
+
+Each search runs in a lane, a different kind of "worth reading". The first is the default.
+
+1. **Breakthroughs** (default) – original, revolutionary research
+2. **Syntheses** – reviews, surveys, meta-analyses
+3. **Engineering and applied** – new technology
+4. **Replications and negative results**
+5. **Datasets and benchmarks**
+6. **Open tools** – general, not only scientific. Sources: GitHub Trending, GitHub search API (new repos by star velocity), Hacker News "Show HN", Product Hunt, Papers with Code. Scored on star growth, commit activity, docs quality, and whether it is usable rather than a demo.
+7. **Cross-field surprises**
+8. **Contrarian and contested**
+
 The project is young and its direction is open.
 
 ## Layout
@@ -18,4 +31,4 @@ The project is young and its direction is open.
 
 ## Platform
 
-Built for Linux. Windows may work, but it is not guaranteed.
+Built for Linux. Windows may work, but it is not being tested on that platform.
